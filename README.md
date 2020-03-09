@@ -1,7 +1,7 @@
 
 # CantTouchThis
 
-I have a hard time avoiding touching my face particularly while on a computer, so I trained a simple ML model that uses my webcam to complain if I do. This package will help you train your own.  
+I have a hard time avoiding touching my face, particularly while on a computer, so I trained a simple ML model that uses my webcam to complain if I do. This package will help you train your own.  
 
 # 1. Getting Started
 
@@ -11,28 +11,79 @@ First Clone this repository
 cd canttouchthis
 `
 
-We'll install this using a python virtual enviroment. In a shell type
+We'll install this using a python virtual environment. In a shell type
 
 ```
 python -m venv ./venv
+source venv/bin/activate
 pip install -r requirements.text
 ```
 
+* Note every time you want to start the code from a new shell you must run
+
+`source venv/bin/activate`
 
 # 2. Building a Dataset
 
 * There is no public dataset for this so you'll have to build to your own
+## 1. Gather your data
+* Point your webcam where you normally site and run
+  `python capture.py`
+* Your camera should now be recording. Work as usual for a while, and then (Now is probably a good time to wash your hands), touch your face as you would normally
+   * You can run this command as many times as you want to get more data
+
+## 2. Label your data
+* Now it's time to tell what you want to machine to learn by creating labels for your training data
+
+`python label.py`
+
+* Make sure you click the image box and hit y for images where you are touching your face and n for images where you aren't 
 
 # 3. Train a Model
+We'll use a pre-trained mobile-net model implemented in Keras. If you want to take a look, it lives in `model.py` otherwise go ahead and run.
 
-# 4 Run
+`python train_model.py`
+
+This command will take a  while to run, but once it's finished, you're ready to run it full time on the webcam.
+
+# 4, Run
+
+Start the model with
+
+`python run.py`
+
+Now, whenever your computer sees you touch your face, it will say 'you can't touch this' to remind you.
+However, with this small data set, you'll probably run into one of the problems below right away.
+
 
 
 # Troubleshooting 
-* Once you 
 
-This is a simple ML model you can train yourself to  
+## Too many false positives (I'm not touching my face, but my computer is yelling at me all the time)
 
-Run Capture
+Every time your computer yells at you, it will save the image that caused it to think you were touching your face. Go ahead and run.
 
-Run Label
+`python label.py`
+
+to label the new false positive images correctly and re-train with
+
+`python train_model.py`
+
+
+
+## Too many false negatives (I am touching my face, but my computer says nothing)
+
+This is a little tricker than false positives. It's too much work to record and label every frame from your webcam, so the easiest thing to wash your hands and start recording more examples of you touching your face by running.
+
+`python capture.py`
+
+label these images
+
+`python label.py`
+
+and re-train the model
+
+`python train_model.py`
+
+
+
