@@ -7,8 +7,8 @@ I have a hard time avoiding touching my face, particularly while on a computer, 
 
 First Clone this repository
 
-`git clone https://github.com/jsearcy1/canttouchthis.git
-cd canttouchthis
+`git clone https://github.com/jsearcy1/donttouchthis.git
+cd donttouchthis
 `
 
 We'll install this using a python virtual environment. In a shell type
