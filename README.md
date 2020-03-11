@@ -1,5 +1,5 @@
 
-# CantTouchThis
+#DontTouchThis
 
 I have a hard time avoiding touching my face, particularly while on a computer, so I trained a simple ML model that uses a webcam to complain if I do. This package will help you train your own.  
 
